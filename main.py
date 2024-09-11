@@ -83,7 +83,7 @@ try:
 
     # Calculate the position for the text
     image_width, image_height = image.size
-    x = int((image_width - text_width) / 2 + 70)  # Move text 70 pixels to the right
+    x = int((image_width - text_width) / 2 + 0)  # Move text 70 pixels to the right
     y = int((image_height - text_height) / 2 - 70)  # Move text 70 pixels up
 
     # Define text color
@@ -111,8 +111,8 @@ try:
         return numbers
 
     numbers = text_to_numbers(main_text)
-    first_7_numbers = numbers[:4]  # Limit to 7 numbers
-    numbers_str = ''.join(map(str, first_7_numbers))  # Remove spaces
+    first_4_numbers = numbers[:4]  # Limit to 4 numbers
+    numbers_str = ''.join(map(str, first_4_numbers))  # Remove spaces
 
     # Define the secondary text
     secondary_text = f"TIGER NO : {numbers_str}"
@@ -123,7 +123,7 @@ try:
     secondary_height = secondary_bbox[3] - secondary_bbox[1]
 
     # Position the secondary text below the main text
-    secondary_x = int((image_width - secondary_width) / 2 + 70)
+    secondary_x = int((image_width - secondary_width) / 2 + 30)
     secondary_y = int(y + text_height + 40)  # Increase offset to move text further down
 
     # Define secondary text color
