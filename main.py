@@ -40,7 +40,7 @@ output_path = "final_output_image.png"
 
 try:
     # Ask user for the profile URL
-    profile_url = input("Please enter the profile URL: ")  # Corrected to full Twitter profile URL
+    profile_url = "https://x.com/Daya9999N"  # Corrected to full Twitter profile URL
 
     # Generate QR code for the profile URL using pyqrcode
     qr_code = pyqrcode.create(profile_url)
@@ -60,14 +60,14 @@ try:
     additional_image.save(temp_image_path)
 
     # Load the main image
-    image_path = r"C:\Users\ravin\Downloads\Copy of Red and Black Gradient Modern Professional Id Card\1.png"
+    image_path = r"C:\Users\ravin\Downloads\Copy of Red and Black Gradient Modern Professional Id Card (1)\1.png"
     image = Image.open(image_path)
     draw = ImageDraw.Draw(image)
 
     # Define the main text and font
     main_text = profile_url.split('/')[-1]
     font_path = r"C:\Users\ravin\Downloads\marykate\MaryKate.ttf"
-    font_size = 50
+    font_size = 80
     try:
         font = ImageFont.truetype(font_path, font_size)
     except IOError:
@@ -87,7 +87,7 @@ try:
     y = int((image_height - text_height) / 2 - 70)  # Move text 70 pixels up
 
     # Define text color
-    text_color = (255, 255, 0)  # Yellow
+    text_color = (199, 161, 58)  # Yellow
 
     # Draw the main text multiple times with offset to simulate bold effect
     for offset in range(-bold_offset, bold_offset + 1):
@@ -111,7 +111,7 @@ try:
         return numbers
 
     numbers = text_to_numbers(main_text)
-    first_7_numbers = numbers[:7]  # Limit to 7 numbers
+    first_7_numbers = numbers[:4]  # Limit to 7 numbers
     numbers_str = ''.join(map(str, first_7_numbers))  # Remove spaces
 
     # Define the secondary text
@@ -129,7 +129,15 @@ try:
     # Define secondary text color
     secondary_text_color = (255, 255, 255)  # White
 
-    # Add the secondary text to the image
+    # Define the bold effect for the secondary text
+    bold_offset_secondary = 1  # You can increase this for a bolder effect
+
+    # Draw the secondary text multiple times with offset to simulate a bold effect
+    for offset in range(-bold_offset_secondary, bold_offset_secondary + 1):
+        draw.text((secondary_x + offset, secondary_y), secondary_text, font=arial_font, fill=secondary_text_color)
+        draw.text((secondary_x, secondary_y + offset), secondary_text, font=arial_font, fill=secondary_text_color)
+
+    # Add the final secondary text to the image to ensure it's on top
     draw.text((secondary_x, secondary_y), secondary_text, font=arial_font, fill=secondary_text_color)
 
     # Load and resize the QR code image
@@ -139,8 +147,8 @@ try:
     additional_image = Image.open(temp_image_path).resize((200, 200)).convert('RGBA')
 
     # Calculate positions for pasting images
-    qr_code_x = int((image_width - qr_code_image.width) / 7.6 + 0)
-    qr_code_y = int(y + text_height + 89.5)  # Place below the main text with a 50-pixel gap
+    qr_code_x = int((image_width - qr_code_image.width) / 8.6 + 21)
+    qr_code_y = int(y + text_height + 78.5)  # Place below the main text with a 50-pixel gap
     additional_image_x = int((image_width - additional_image.width) / 2 - additional_image.width - 88)
     additional_image_y = int((image_height - additional_image.height) / 2.6)  # Center vertically
 
